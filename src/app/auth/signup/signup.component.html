@@ -1,0 +1,67 @@
+<div class="container py-5 bg-light">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center text-primary mb-4">Social Network</h2>
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="card rounded-0">
+                        <div class="card-header">
+                            <h3 class="mb-0 text-secondary">Sign Up</h3>
+                        </div>
+                        <div class="card-body">
+                            <form class="form" #form="ngForm" (ngSubmit)="signup(form)" >
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input 
+                                        class="form-control form-control"
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        ngModel
+                                        required>
+                                    <div class="invalid-feedback">Oops, you missed this one.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Full Name</label>
+                                    <input 
+                                        class="form-control form-control"
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        ngModel
+                                        required>
+                                    <div class="invalid-feedback">Oops, you missed this one.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input 
+                                        class="form-control form-control"
+                                        type="password"
+                                        id="password"
+                                        name="password"
+                                        class="form-control"
+                                        ngModel
+                                        required>
+                                    <div class="invalid-feedback">Enter your password too!</div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Confirm Password</label>
+                                    <input 
+                                        class="form-control form-control"
+                                        type="password"
+                                        id="confirmPassword"
+                                        name="confirmPassword"
+                                        class="form-control"
+                                        ngModel
+                                        required>
+                                    <div class="invalid-feedback">Enter your password too!</div>
+                                </div>
+                                <button type="submit" [disabled]="form.invalid" class="btn btn-success btn-lg float-right" id="btnLogin">Sign Up</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="modal-body">
+    <form #form="ngForm" (ngSubmit)="createPost()"  class="form center-block">
+        <div class="form-group">
+            <textarea class="form-control input-lg" 
+                autofocus=""
+                name="post"
+                id="post"
+                placeholder="What do you want to share?"
+                [(ngModel)]="post"></textarea>
+        </div>
+        <button class="btn btn-primary ml-auto" type="submit">Post</button>
+    </form>
+</div>
