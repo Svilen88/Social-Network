@@ -7,6 +7,7 @@ import { WallComponent } from './wall/wall.component';
 import { PostsComponent } from './wall/posts/posts.component';
 import { CreatePostComponent } from './wall/create-post/create-post.component';
 import { SidebarComponent } from './wall/sidebar/sidebar.component';
+import { CommentsComponent } from './wall/comments/comments.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,6 @@ import { SidebarComponent } from './wall/sidebar/sidebar.component';
     ApplicationRoutingModule,
     FormsModule
   ],
-  declarations: [WallComponent, PostsComponent, CreatePostComponent, SidebarComponent]
+  declarations: [WallComponent, PostsComponent, CreatePostComponent, SidebarComponent, CommentsComponent]
 })
 export class ApplicationModule { }

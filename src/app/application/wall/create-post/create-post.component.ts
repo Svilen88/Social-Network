@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ApplicationService } from '../../application.service';
 import { AppState } from '../../../store/app.state';
 import { Store } from '@ngrx/store';
+import { NgForm } from '@angular/forms';
 
 @Component({
     selector: 'app-create-post',
@@ -16,7 +17,7 @@ export class CreatePostComponent {
         private store: Store<AppState>,
     ) { }
 
-    createPost() {
+    createPost(form: NgForm) {
         const date = new Date(Date.now()).toUTCString()
         const postBody = {
             time: {
@@ -27,6 +28,7 @@ export class CreatePostComponent {
             author: localStorage.getItem('username'),
             post: this.post
         }
+        form.resetForm()
         this.applicationService.createPost(postBody)
     }
 }

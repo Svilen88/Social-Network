@@ -8,21 +8,22 @@ function getAllPosts(state, action) {
     }
 }
 
-function addNewPost(state, action) {
+function getAllCommentsForPost(state, action) {
+    const key = Object.keys(action)[0]
+    const stateAll = {...state.all}
+    stateAll[key]['comments'] = action[key]
     return {
-        all: [
-            ...state.all,
-            action
-        ]
+        ...state,
+        all: stateAll
     }
 }
 
-export function postsReducer(state: PostsState = {all: {}, add: {}}, action: PostsActions.Types) {
+export function postsReducer(state: PostsState = {all: {}}, action: PostsActions.Types) {
     switch (action.type) {
         case PostsActions.GET_ALL_POSTS:
             return getAllPosts(state, action.payload)
-        case PostsActions.ADD_NEW_POST:
-            return addNewPost(state, action.payload)
+        case PostsActions.GET_COMMENTS_FOR_POST:
+            return getAllCommentsForPost(state, action.payload)
         default:
             return false
     }
