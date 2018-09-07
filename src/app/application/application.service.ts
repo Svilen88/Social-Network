@@ -29,16 +29,16 @@ export class ApplicationService {
             .push(body)
     }
 
-    getAllCommentsForPost(postId) {
-        console.log(postId)
-        firebase.database()
-            .ref(`comments/${postId}`)
-            .once('value', snapshot => {
-                // TODO
-                const comments = { [postId]: snapshot.val() }
-                this.store.dispatch(new GetCommentsForPost(comments))
-            })
-    }
+    // getAllCommentsForPost(postId) {
+    //     console.log(postId)
+    //     firebase.database()
+    //         .ref(`comments/${postId}`)
+    //         .once('value', snapshot => {
+    //             // TODO
+    //             const comments = { [postId]: snapshot.val() }
+    //             this.store.dispatch(new GetCommentsForPost(comments))
+    //         })
+    // }
 
     getAllPosts() {
         firebase.database()
