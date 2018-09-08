@@ -14,7 +14,8 @@ import { FooterComponent } from './footer/footer.component';
 import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './auth/auth.guard';
 import { TokenInterceptor } from './interceptors/token.interceptor';
-import { appReducers } from './store/app.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { effects } from './application/store';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { appReducers } from './store/app.reducers';
     ],
     imports: [
         BrowserModule,
-        StoreModule.forRoot(appReducers),
+        StoreModule.forRoot({}),
+        EffectsModule.forRoot(effects),
         StoreDevtoolsModule.instrument({
             maxAge: 10
         }),

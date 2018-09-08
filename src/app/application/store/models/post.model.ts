@@ -1,5 +1,5 @@
 export interface Post {
-    postId: {
+    [postId: string]: {
         author: string,
         post: string,
         time: {

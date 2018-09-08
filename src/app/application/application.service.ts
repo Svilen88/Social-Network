@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store'
 import { AuthService } from '../auth/auth.service';
-import { AppState } from '../store/app.state';
 import * as firebase from 'firebase';
-import { GetAllPosts, GetCommentsForPost } from '../store/actions/posts.action';
 import { ToastrService } from 'ngx-toastr';
+import { Observable, of } from 'rxjs';
+import { Post } from './store/models/post.model';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +13,6 @@ export class ApplicationService {
 
     constructor(
         private authService: AuthService,
-        private store: Store<AppState>,
         private toastr: ToastrService
     ) { }
 
@@ -40,14 +39,20 @@ export class ApplicationService {
     //         })
     // }
 
-    getAllPosts() {
-        firebase.database()
+    getAllPosts(): Observable<Post[]> {
+        const fdb = firebase.database()
             .ref('posts')
-            .on('value', res => {
-                if (res.val()) {
-                    this.store.dispatch(new GetAllPosts(res.val()))
+            .on('value', snapshot => {
+                const posts: Post[] = []
+                const keys = Object.keys(snapshot.val())
+                for (const key of keys) {
+                    posts.push({
+                        [key]: snapshot.val()[key]
+                    })
                 }
+                return posts
             })
+        return of<Post[]>(fdb)
     }
 
     // private calcTime(dateIsoFormat) {
