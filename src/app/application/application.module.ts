@@ -11,15 +11,17 @@ import { CommentsComponent } from './wall/comments/comments.component';
 
 import { EffectsModule } from '@ngrx/effects'
 import { StoreModule } from '@ngrx/store';
-import { reducers, effects } from './store';
+import { postsReducers, postsEffects, commentsEffects, commentsReducers } from './store';
 
 @NgModule({
   imports: [
     CommonModule,
     ApplicationRoutingModule,
     FormsModule,
-    StoreModule.forFeature('posts', reducers),
-    EffectsModule.forFeature(effects)
+    StoreModule.forFeature('comments', commentsReducers),
+    StoreModule.forFeature('posts', postsReducers),
+    EffectsModule.forFeature(postsEffects),
+    EffectsModule.forFeature(commentsEffects)
   ],
   declarations: [WallComponent, PostsComponent, CreatePostComponent, SidebarComponent, CommentsComponent]
 })

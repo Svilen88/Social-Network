@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store'
 import { AuthService } from '../auth/auth.service';
 import * as firebase from 'firebase';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, of } from 'rxjs';
 import { Post } from './store/models/post.model';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Comment } from './store/models/comment.model';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +15,8 @@ export class ApplicationService {
 
     constructor(
         private authService: AuthService,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private db: AngularFireDatabase
     ) { }
 
     createPost(body) {
@@ -28,31 +31,37 @@ export class ApplicationService {
             .push(body)
     }
 
-    // getAllCommentsForPost(postId) {
-    //     console.log(postId)
-    //     firebase.database()
-    //         .ref(`comments/${postId}`)
-    //         .once('value', snapshot => {
-    //             // TODO
-    //             const comments = { [postId]: snapshot.val() }
-    //             this.store.dispatch(new GetCommentsForPost(comments))
-    //         })
-    // }
+    getAllCommentsForPost(postId): Observable<Comment[]> {
+        return this.db.list(`comments/${postId}`)
+            .snapshotChanges()
+            .pipe(
+                map(a => a.map(b => {
+                    const comment: Comment = { author: '', authorId: '', comment: '', postId: '', commentId: '' }
+                    const keys = Object.keys(b.payload.val())
+                    for (const key of keys) {
+                        comment[key] = b.payload.val()[key]
+                    }
+                    return comment
+                }))
+            )
+    }
 
     getAllPosts(): Observable<Post[]> {
-        const fdb = firebase.database()
-            .ref('posts')
-            .on('value', snapshot => {
-                const posts: Post[] = []
-                const keys = Object.keys(snapshot.val())
-                for (const key of keys) {
-                    posts.push({
-                        [key]: snapshot.val()[key]
+        return this.db.list('posts')
+            .snapshotChanges()
+            .pipe(
+                map(a =>
+                    a.map(b => {
+                        const post: Post = { author: '', post: '', postId: '', time: { ect: 0, lmt: 0 }, uid: '' }
+                        const keys = Object.keys(b.payload.val())
+                        for (const key of keys) {
+                            post[key] = b.payload.val()[key]
+                        }
+                        post.postId = b.key
+                        return post
                     })
-                }
-                return posts
-            })
-        return of<Post[]>(fdb)
+                )
+            )
     }
 
     // private calcTime(dateIsoFormat) {

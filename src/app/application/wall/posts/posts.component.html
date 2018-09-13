@@ -5,17 +5,16 @@
     <div class="panel-body">
         <div class="clearfix"></div>
         <hr>
-        <p>{{post.value.post}}</p>
+        <p>{{post.post}}</p>
         <hr>
-        <form class="form-group" #form="ngForm" (ngSubmit)="createComment(form, post.key)">
+        <form class="form-group" #form="ngForm" (ngSubmit)="createComment(form, post.postId)">
             <div class="input-group">
                 <input class="form-control" placeholder="Add a comment.." type="text" ngModel name="comment" id="comment">
                 <button class="btn btn-primary ml-2" type="submit">Comment</button>
             </div>
         </form>
     </div>
-    <button class="btn btn-info" (click)="getComments(post.key)">Get Comments</button>
-    <button class="btn btn-primary">Delete Post</button>
+    <button class="btn btn-primary ml-2">Delete Post</button>
     <hr>
-    <app-comments></app-comments>
+    <app-comments postId={{post.postId}}></app-comments>
 </div>

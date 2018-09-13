@@ -7,6 +7,7 @@ export const GET_POSTS_SUCCESS = '[POSTS] Get All Posts Success'
 
 export class GetPosts implements Action {
     readonly type = GET_POSTS
+    constructor() { }
 }
 
 export class GetPostsFail implements Action {

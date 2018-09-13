@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ApplicationService } from '../../application.service';
-import { AppState } from '../../../store/app.state';
 import { Store } from '@ngrx/store';
 import { NgForm } from '@angular/forms';
 
@@ -13,8 +12,7 @@ export class CreatePostComponent {
     post: string
 
     constructor(
-        private applicationService: ApplicationService,
-        private store: Store<AppState>,
+        private applicationService: ApplicationService
     ) { }
 
     createPost(form: NgForm) {

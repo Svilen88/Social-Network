@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+    production: false,
+    firebase: {
+        apiKey: 'AIzaSyBvaKESem0IajpGRt80RfXtPMaJIDXzEug',
+        authDomain: 'socia-network-f86d8.firebaseapp.com',
+        databaseURL: 'https://socia-network-f86d8.firebaseio.com',
+        projectId: 'socia-network-f86d8',
+        storageBucket: 'socia-network-f86d8.appspot.com',
+        messagingSenderId: '454838916539'
+    }
 };
 
 /*
