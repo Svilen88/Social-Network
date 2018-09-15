@@ -4,7 +4,7 @@ import * as firebase from 'firebase';
 import { ToastrService } from 'ngx-toastr';
 import { Post } from './store/models/post.model';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Comment } from './store/models/comment.model';
 
@@ -19,10 +19,9 @@ export class ApplicationService {
         private db: AngularFireDatabase
     ) { }
 
-    createPost(body) {
-        firebase.database()
-            .ref('posts')
-            .push(body)
+    createPost(body: Post) {
+        this.db.list('posts').push(body)
+        this.getAllPosts()
     }
 
     createComment(body, postId) {
@@ -52,7 +51,7 @@ export class ApplicationService {
             .pipe(
                 map(a =>
                     a.map(b => {
-                        const post: Post = { author: '', post: '', postId: '', time: { ect: 0, lmt: 0 }, uid: '' }
+                        const post: Post = { author: '', post: '', postId: '', time: { ect: '', lmt: '' }, uid: '' }
                         const keys = Object.keys(b.payload.val())
                         for (const key of keys) {
                             post[key] = b.payload.val()[key]

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ApplicationService } from '../../application.service';
 import { Store } from '@ngrx/store';
 import * as fromStore from '../../store';
 import { Observable } from 'rxjs';
@@ -26,7 +25,7 @@ export class PostsComponent implements OnInit {
         this.store.dispatch(new fromStore.GetPosts())
     }
 
-    createComment(form: NgForm, postId) {
-        
+    createComment() {
+        console.log('post')
     }
 }

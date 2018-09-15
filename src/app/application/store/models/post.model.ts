@@ -2,10 +2,10 @@ export interface Post {
     author: string,
     post: string,
     time: {
-        ect: number,
-        lmt: number
+        ect: string,
+        lmt: string
     },
     uid: string,
-    postId: string,
+    postId?: string,
     error?: string
 }
